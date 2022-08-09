@@ -1,24 +1,31 @@
-import Form from "./Form";
+import {
+  Routes,
+  Route,
+  // Navigate
+   } from "react-router-dom";
+import {
+  Suspense
+} from 'react';
+import HomePages from "pages/HomePages";
+import RegisterPages from "pages/RegisterPages";
+import LoginPages from "pages/LoginPages";
 import ContactList from "./ContactList";
-import Filter from "./Filter";
-import AppHeadBar from "./AppHeadBar";
-import{ AuthForm} from './AuthForm/AuthForm';
-import css from './App.module.css';
+import Loader from "./Loader";
 
-export default function App() {
+
+export const App = () => {
 
     return (
-      <>
-         <AppHeadBar />
-         <AuthForm />
-        <div className={css.wrapper}>
-          <h1 className={css.wrapper__title}>Phonebook</h1>
-          <Form />
-          <h1 className={css.wrapper__title}>Contacts :</h1>
-          <Filter  />
-            <ContactList />
-        </div>
-      </>
-
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          {/* <Route path="*" element={<Navigator to='register' />} />
+          <Route path="/" element={<Navigator to='register' />} /> */}
+          <Route path="/" element={<HomePages/>}>
+            <Route path="register" element={<RegisterPages/>} />
+            <Route path="login" element={<LoginPages/>} />
+            <Route path="contacts" element={<ContactList/>} />
+          </Route>
+        </Routes>
+      </Suspense>
     )
 };

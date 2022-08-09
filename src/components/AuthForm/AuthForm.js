@@ -83,7 +83,8 @@ import { Typography, Box } from "@mui/material";
 // );
 
 
-export const AuthForm = () => {
+export const AuthForm = ({title}) => {
+
   return (
     <div>
       <Box
@@ -101,7 +102,7 @@ export const AuthForm = () => {
             marginBottom: '40px',
           }}
         >
-          Register
+          {title}
         </Typography>
       </Box>
     </div>
