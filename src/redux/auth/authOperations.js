@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import {toast} from 'react-toastify';
 
 const token = {
   set(token) {
@@ -19,7 +20,7 @@ export const register = createAsyncThunk('/auth/register', async credentials => 
     token.set(data.token);
     return data;
   } catch (error) {
-      alert('Register failed!!! Try again!!!')
+      toast.error('Register failed!!! Try again!!!')
   };
 });
 
@@ -32,7 +33,7 @@ export const login = createAsyncThunk('/auth/login', async credentials => {
     token.set(data.token);
     return data;
   } catch (error) {
-      alert('Login failed!!! Try again!!!')
+      toast.error('Login failed!!! Try again!!!')
   };
 });
 
@@ -45,7 +46,7 @@ export const logout = createAsyncThunk('/auth/logout', async credentials => {
     token.unset();
     return data;
   } catch (error) {
-      alert('Logout failed!!! Try again!!!')
+      toast.error('Logout failed!!! Try again!!!')
   };
 });
 
@@ -61,6 +62,6 @@ async ( _, {getState, rejectWithValue}) => {
     );
     return data;
   } catch (error) {
-      alert('Refresh failed!!! Try again!!!')
+      toast.error('Refresh failed!!! Try again!!!')
   };
 });
