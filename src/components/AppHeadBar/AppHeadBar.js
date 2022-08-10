@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+import { getLoggedIn } from 'redux/auth/authSelectors';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -5,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import {
-  // NavLink,
+  NavLink,
   Outlet } from 'react-router-dom';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 
@@ -28,6 +30,7 @@ const activeLinkStyle = {
 };
 
 const AppHeadBar = () => {
+  const isLoggedIn = useSelector(getLoggedIn);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -45,19 +48,22 @@ const AppHeadBar = () => {
             sx={{ flexGrow: 1 }}>
               Phonebook
           </Typography>
-            <>
-              <Button style={activeLinkStyle }>
-                {/* <NavLink style={activeLinkStyle } to='/register'> */}
-                  Register
-                {/* </NavLink> */}
-              </Button>
-              <Button style={linkStyle}>
-              {/* <NavLink style={linkStyle} to='/login'> */}
-                  Log in
-                {/* </NavLink> */}
-              </Button>
-            </>
-             <UserMenu />
+           {!isLoggedIn
+           ? ( <>
+                  <Button>
+                    <NavLink style={({isActive}) => isActive ? activeLinkStyle : linkStyle }
+                     to='/register'>
+                      Register
+                    </NavLink>
+                  </Button>
+                  <Button>
+                    <NavLink style={({isActive}) => isActive ? activeLinkStyle : linkStyle}
+                     to='/login'>
+                      Log in
+                    </NavLink>
+                  </Button>
+                </>)
+             : (<UserMenu />)}
         </Toolbar>
       </AppBar>
       <Outlet />
