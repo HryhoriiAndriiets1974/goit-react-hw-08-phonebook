@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import Contact from './Contact';
 import Loader from 'components/Loader';
 import {useGetContactsApiQuery} from '../../redux/contactsApi';
