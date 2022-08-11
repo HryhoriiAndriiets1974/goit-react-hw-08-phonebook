@@ -1,17 +1,18 @@
 import Contact from './Contact';
 import Loader from 'components/Loader';
 import {useGetContactsApiQuery} from '../../redux/contactsApi';
+import { useFilter } from 'hooks/hookFilter';
 import css from './ContactList.module.css';
 
 const ContactList = () => {
-  const value = useSelector(state => state.filter);
-  const {data, isLoading} = useGetContactsApiQuery();
+  const {filter} = useFilter();
+  const {data: contacts, isLoading} = useGetContactsApiQuery();
 
   const filterContacts = () => {
     return (
-      data &&
-      data.filter(contact =>
-      contact.name.toLowerCase().includes(value.toLowerCase())
+      contacts &&
+      contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
     ));
   };
 
@@ -21,7 +22,7 @@ const ContactList = () => {
     <>
       {isLoading && <Loader />}
         <ul className={css.contacts}>
-          { data && !isLoading && filterRez.length > 0
+          { contacts && !isLoading && filterRez.length > 0
             ? (
                 filterRez.map(({id, name, phone}) => (
                   <li key={id} className={css.contacts__item}>
