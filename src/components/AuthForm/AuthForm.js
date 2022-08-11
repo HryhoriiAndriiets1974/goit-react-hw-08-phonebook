@@ -1,38 +1,46 @@
-// import { Formik, Form, Field } from "formik";
+import  PropTypes from "prop-types";
+import { Formik, Form, Field } from "formik";
 import { Typography, Box } from "@mui/material";
-// import IconButton from "@mui/material/IconButton";
-// import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
+import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
+import VisibilityOffTwoToneIcon from '@mui/icons-material/VisibilityOffTwoTone';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import css from './AuthForm.module.css';
+import { login, register } from "redux/auth/authOperations";
 
-// const validateName = value => {
-//   let error;
-//   if (!value) {
-//     error = 'Required';
-//   } else if (/^[A-Za-z]+$/.test(value)) {
-//     error = 'Invalid name';
-//   }
-//   return error;
-// };
 
-// function validateEmail(value) {
-//   let error;
-//   if (!value) {
-//     error = 'Required';
-//   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-//     error = 'Invalid email address';
-//   }
-//   return error;
-// }
+const validateName = value => {
+  let error;
+  if (!value) {
+    error = 'Required';
+  } else if (/^[A-Za-z]+$/.test(value)) {
+    error = 'Invalid name';
+  }
+  return error;
+};
 
-// const validatePassword = value => {
-//   let error;
-//   if (!value) {
-//     error = 'Required';
-//   }
-//   if (value.length < 7) {
-//     error = 'Password to short';
-//   }
-//   return error;
-// };
+function validateEmail(value) {
+  let error;
+  if (!value) {
+    error = 'Required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+    error = 'Invalid email address';
+  }
+  return error;
+}
+
+const validatePassword = value => {
+  let error;
+  if (!value) {
+    error = 'Required';
+  }
+  if (value.length < 7) {
+    error = 'Password to short';
+  }
+  return error;
+};
 
 // function validateUsername(value) {
 //   let error;
@@ -42,51 +50,25 @@ import { Typography, Box } from "@mui/material";
 //   return error;
 // }
 
-// export const FieldLevelValidationExample = () => (
-//   <div>
-//     <h1>Signup</h1>
-//     <Formik
-//       initialValues={{
-//         username: '',
-//         email: '',
-//       }}
-//       onSubmit={values => {
-//         // same shape as initial values
-//         console.log(values);
-//       }}
-//     >
-//       {({ errors, touched, validateField, validateForm }) => (
-//         <Form>
-//           <Field name="email" validate={validateEmail} />
-//           {errors.email && touched.email && <div>{errors.email}</div>}
-
-//           <Field name="username" validate={validateUsername} />
-//           {errors.username && touched.username && <div>{errors.username}</div>}
-//           {/** Trigger field-level validation
-//            imperatively */}
-//           <button type="button" onClick={() => validateField('username')}>
-//             Check Username
-//           </button>
-//           {/** Trigger form-level validation
-//            imperatively */}
-//           <button
-//             type="button"
-//             onClick={() => validateForm().then(() => console.log('blah'))}
-//           >
-//             Validate All
-//           </button>
-//           <button type="submit">Submit</button>
-//         </Form>
-//       )}
-//     </Formik>
-//   </div>
-// );
-
-
 export const AuthForm = ({title}) => {
+  const dispatch = useDispatch();
+  const [value, setValue] = useState({showPassword: false,});
+
+    const handlePassword = () => {
+    setValue({
+      ...value,
+      showPassword: !value.showPassword,
+    });
+  };
+
+  const handleSubmit = (name, email, password) => {
+    title === 'Register'
+      ? dispatch(register({name, email, password}))
+      : dispatch(login({email,password}));
+  };
 
   return (
-    <div>
+    <div className={css.form}>
       <Box
         display='flex'
         flexDirection='column'
@@ -104,7 +86,123 @@ export const AuthForm = ({title}) => {
         >
           {title}
         </Typography>
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+            name: '',
+            showPassword: false,
+          }}
+          onSubmit={(values, {resetForm}) => {
+            handleSubmit(values.name, values.email, values.password);
+            resetForm();
+          }}
+          >
+            {({errors, touched, values}) => {
+                const password = values.password.length >= 7;
+
+                return (
+                  <Form>
+                    {title === 'Register'
+                        ? (
+                          <Box className={css.input__thumb}>
+                            <Typography
+                              variant="caption"
+                              className={css.input__text}>
+                                Name
+                            </Typography>
+                            <Field
+                              className={css.form__input}
+                              name="name"
+                              type="text"
+                              validate={validateName}
+                            />
+                            {errors.name && touched.name && (
+                              <Typography
+                                variant="subtitle1"
+                                className={css.input__help}
+                              >
+                                {errors.name}
+                              </Typography>
+                            )}
+                          </Box>)
+                        : null}
+                    <Box className={css.input__thumb}>
+                      <Typography
+                        variant="caption"
+                        className={css.input__text}>
+                          Email
+                      </Typography>
+                      <Field
+                        className={css.form__input}
+                        name="email"
+                        type="email"
+                        validate={validateEmail}
+                      />
+                      {errors.email && touched.email && (
+                        <Typography
+                          variant="subtitle1"
+                          className={css.input__help}
+                        >
+                          {errors.email}
+                        </Typography>
+                      )}
+                    </Box>
+                    <Box className={css.input__thumb}>
+                      <Typography variant="caption" className={css.input__text}>
+                        Password
+                      </Typography>
+                      <Field
+                        className={css.form__input}
+                        type={value.showPassword ? 'text' : 'password'}
+                        name="password"
+                        validate={validatePassword}
+                      />
+                      <IconButton
+                        style={{
+                          width: '24px',
+                          height: '24px',
+                          position: 'absolute',
+                          top: '7px',
+                          right: '-67px',
+                        }}
+                        size="small"
+                        type="button"
+                        onClick={handlePassword}
+                      >
+                        {value.showPassword
+                          ? <VisibilityTwoToneIcon />
+                          : <VisibilityOffTwoToneIcon />}
+                      </IconButton>
+                      {errors.password && touched.password && (
+                        <Typography
+                          variant="subtitle1"
+                          className={css.input__help}
+                        >
+                          {errors.password}
+                        </Typography>
+                      )}
+                    </Box>
+
+                    <Button
+                      className={css.form__btn}
+                      fullWidth={true}
+                      color="primary"
+                      type="submit"
+                      disabled={!!errors.email || !password}
+                    >
+                      {title === 'Register' ? 'Register' : 'Login'}
+                    </Button>
+                  </Form>
+                );
+              }
+            }
+          </Formik>
       </Box>
     </div>
   )
+};
+
+AuthForm.propTypes = {
+  title: PropTypes.string.isRequired,
 }

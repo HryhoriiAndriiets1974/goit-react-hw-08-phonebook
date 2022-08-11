@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
-import Form from "components/Form";
-import Filter from "components/Filter";
-import ContactList from "components/ContactList";
+// import Form from "components/Form";
+// import Filter from "components/Filter";
+// import ContactList from "components/ContactList";
 import css from '../components/App.module.css';
 
 const ContactsPages = () => {
@@ -16,13 +16,13 @@ const ContactsPages = () => {
     >
         <div className={css.wrapper}>
           <h1 className={css.wrapper__title}>Phonebook</h1>
-          <Form />
+          {/* <Form /> */}
           <h1 className={css.wrapper__title}>Contacts :</h1>
-          <Filter  />
-            <ContactList />
+          {/* <Filter  />
+            <ContactList /> */}
         </div>
     </Box>
   )
 };
 
-export default ContactList;
+export default ContactsPages;

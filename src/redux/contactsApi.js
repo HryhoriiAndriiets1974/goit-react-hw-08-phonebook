@@ -10,7 +10,8 @@ export const contactsApi = createApi({
       const token = getState().auth.token;
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
-      } return headers;
+      }
+      return headers;
     },
   }),
   endpoints: builder => ({

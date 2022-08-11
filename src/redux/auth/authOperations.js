@@ -54,10 +54,10 @@ export const fetchCurrentUser = createAsyncThunk('/auth/refresh',
 async ( _, {getState, rejectWithValue}) => {
   const state = getState();
   const persistedToken = state.auth.token;
-  if (persistedToken === null) return rejectWithValue;
+  if (persistedToken === null) return rejectWithValue();
   token.set(persistedToken);
   try {
-    const {data} = await axios(
+    const {data} = await axios.get(
       'https://connections-api.herokuapp.com/users/current'
     );
     return data;

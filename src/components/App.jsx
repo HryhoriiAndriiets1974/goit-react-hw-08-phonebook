@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import HomePages from "pages/HomePages";
 import RegisterPages from "pages/RegisterPages";
 import LoginPages from "pages/LoginPages";
-import ContactList from "./ContactList";
+import ContactsPages from "pages/ContactsPages";
 import Loader from "./Loader";
 import { fetchCurrentUser } from "redux/auth/authOperations";
 import PublicRoute from "routes/PublicRoute";
@@ -27,11 +27,11 @@ export const App = () => {
   }, [dispath]);
 
    return (
-     <>
+
+        <Suspense fallback={<Loader />}>
         <ToastContainer
           autoClose={5000}
         />
-        <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="*" element={<Navigate to='register' />} />
             <Route path="/" element={<Navigate to='register' />} />
@@ -43,11 +43,10 @@ export const App = () => {
                 <Route path="login" element={<LoginPages/>} />
               </Route>
               <Route element={<PrivateRoute redirectTo="login" />} >
-                <Route path="contacts" element={<ContactList/>} />
+                <Route path="contacts" element={<ContactsPages/>} />
               </Route>
             </Route>
           </Routes>
         </Suspense>
-      </>
     )
 };
