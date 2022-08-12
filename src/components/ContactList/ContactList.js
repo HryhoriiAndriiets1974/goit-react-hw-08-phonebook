@@ -24,12 +24,12 @@ const ContactList = () => {
         <ul className={css.contacts}>
           { contacts && !isLoading && filterRez.length > 0
             ? (
-                filterRez.map(({id, name, phone}) => (
+                filterRez.map(({id, name, number}) => (
                   <li key={id} className={css.contacts__item}>
                     <Contact
                       id={id}
                       name={name}
-                      phone={phone}
+                      number={number}
                     />
                   </li>
               ))

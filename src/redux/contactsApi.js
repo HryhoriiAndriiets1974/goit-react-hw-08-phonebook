@@ -2,7 +2,6 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 export const contactsApi = createApi({
   reducerPath: 'contactsApi',
-  tagTypes: ['Contact'],
   baseQuery: fetchBaseQuery({
     // baseUrl: 'https://62e7ce640e5d74566afc5699.mockapi.io/',
     baseUrl: 'https://connections-api.herokuapp.com',
@@ -14,14 +13,15 @@ export const contactsApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ['Contact'],
   endpoints: builder => ({
     getContactsApi: builder.query({
       query: () => '/contacts',
       providesTags: ['Contact'],
     }),
     delContact: builder.mutation({
-      query: contactsId => ({
-        url: `/contacts/${contactsId}`,
+      query: id => ({
+        url: `/contacts/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Contact'],

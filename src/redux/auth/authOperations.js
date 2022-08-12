@@ -7,7 +7,7 @@ const token = {
     axios.defaults.headers.common.Authrization = `Bearer ${token}`;
   },
   unset() {
-    axios.defaults.headers.common.Authrization = '';
+    axios.defaults.headers.common.Authrization = ' ';
   },
 };
 
