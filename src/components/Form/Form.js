@@ -42,7 +42,7 @@ function Form() {
   const resetForm = (e) => {
     setName('');
     setNumber('');
-    e.currentTarget.reset();
+    e.target.reset();
   }
 
     return (

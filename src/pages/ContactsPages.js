@@ -11,7 +11,7 @@ const ContactsPages = () => {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
-      backgroundColor="#ccffcd"
+      backgroundColor="greenyellow"
       paddingBottom="250px"
     >
         <div className={css.wrapper}>
