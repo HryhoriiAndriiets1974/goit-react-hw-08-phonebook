@@ -2,7 +2,7 @@ import  PropTypes from "prop-types";
 import { Formik, Form, Field } from "formik";
 import { Typography, Box } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
 import VisibilityOffTwoToneIcon from '@mui/icons-material/VisibilityOffTwoTone';
 import { useState } from "react";
@@ -79,9 +79,13 @@ export const AuthForm = ({title}) => {
           variant="h2"
           style={{
             fontWeight: 'bold',
-            lineHeight: '3',
+            lineHeight: '1.2',
             fontSize: '40px',
-            marginBottom: '40px',
+            margin: '40px',
+            color: 'var(--accent-color)',
+            // backgroundColor: '#000',
+            backgroundColor:' hsl(192, 74%, 70%,0.5)',
+            boxShadow:' 0 0 10px 1px hsl(192, 74%, 70%)',
           }}
         >
           {title}
@@ -184,15 +188,23 @@ export const AuthForm = ({title}) => {
                       )}
                     </Box>
 
-                    <Button
+                    {/* <Button
                       className={css.form__btn}
                       fullWidth={true}
-                      color="primary"
+                      // color="primary"
                       type="submit"
                       disabled={!!errors.email || !password}
                     >
                       {title === 'Register' ? 'Register' : 'Login'}
-                    </Button>
+                    </Button> */}
+                    <button
+                      className={css.form__btn}
+                      disabled={!!errors.email || !password}>
+                      {title === 'Register' ? 'Register' : 'Login'}
+                    </button>
+                    <div className={css.form__img}>
+
+                    </div>
                   </Form>
                 );
               }

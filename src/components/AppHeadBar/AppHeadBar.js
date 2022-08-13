@@ -33,7 +33,7 @@ const AppHeadBar = () => {
   const isLoggedIn = useSelector(getLoggedIn);
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static"  background-color="var(--accent-color)">
         <Toolbar>
           <IconButton
             size="large"
