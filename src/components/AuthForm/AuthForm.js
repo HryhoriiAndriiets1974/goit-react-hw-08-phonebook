@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import css from './AuthForm.module.css';
 import { login, register } from "redux/auth/authOperations";
+import Footer from "components/Footer";
 
 
 const validateName = value => {
@@ -211,6 +212,7 @@ export const AuthForm = ({title}) => {
             }
           </Formik>
       </Box>
+      <Footer />
     </div>
   )
 };
