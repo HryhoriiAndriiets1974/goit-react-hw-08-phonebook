@@ -1,3 +1,7 @@
+body {
+  background-color: var(--accent-color);
+}
+
 .contacts {
   font-size: 20px;
   padding: 10px;
