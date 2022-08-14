@@ -5,19 +5,25 @@ import {
    } from "react-router-dom";
 import {
   Suspense,
-  useEffect
+  useEffect,
+  lazy
 } from 'react';
 import { useDispatch } from "react-redux";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import HomePages from "pages/HomePages";
-import RegisterPages from "pages/RegisterPages";
-import LoginPages from "pages/LoginPages";
-import ContactsPages from "pages/ContactsPages";
+// import RegisterPages from "pages/RegisterPages";
+// import LoginPages from "pages/LoginPages";
+// import ContactsPages from "pages/ContactsPages";
 import Loader from "./Loader";
 import { fetchCurrentUser } from "redux/auth/authOperations";
 import PublicRoute from "routes/PublicRoute";
-import PrivateRoute from 'routes/PrivateRoute';
+// import PrivateRoute from 'routes/PrivateRoute';
+
+const PrivateRoute = lazy(()=> import('routes/PrivateRoute'));
+const RegisterPages = lazy(()=> import('pages/RegisterPages'));
+const LoginPages = lazy(()=> import('pages/LoginPages'));
+const ContactsPages = lazy(()=> import('pages/ContactsPages'));
 
 export const App = () => {
   const dispath = useDispatch();
@@ -27,7 +33,6 @@ export const App = () => {
   }, [dispath]);
 
    return (
-
         <Suspense fallback={<Loader />}>
         <ToastContainer
           autoClose={5000}
