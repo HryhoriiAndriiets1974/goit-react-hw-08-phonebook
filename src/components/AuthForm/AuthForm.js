@@ -113,6 +113,7 @@ export const AuthForm = ({title}) => {
                           <Box className={css.input__thumb}>
                             <Typography
                               variant="caption"
+                              fontSize="14px"
                               className={css.input__text}>
                                 Name
                             </Typography>
@@ -135,6 +136,7 @@ export const AuthForm = ({title}) => {
                     <Box className={css.input__thumb}>
                       <Typography
                         variant="caption"
+                        fontSize="14px"
                         className={css.input__text}>
                           Email
                       </Typography>
@@ -154,7 +156,10 @@ export const AuthForm = ({title}) => {
                       )}
                     </Box>
                     <Box className={css.input__thumb}>
-                      <Typography variant="caption" className={css.input__text}>
+                      <Typography
+                        variant="caption"
+                        fontSize="14px"
+                        className={css.input__text}>
                         Password
                       </Typography>
                       <Field
