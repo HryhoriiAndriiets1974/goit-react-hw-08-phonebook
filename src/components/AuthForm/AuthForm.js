@@ -2,7 +2,6 @@ import  PropTypes from "prop-types";
 import { Formik, Form, Field } from "formik";
 import { Typography, Box } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-// import Button from "@mui/material/Button";
 import VisibilityTwoToneIcon from '@mui/icons-material/VisibilityTwoTone';
 import VisibilityOffTwoToneIcon from '@mui/icons-material/VisibilityOffTwoTone';
 import { useState } from "react";
@@ -43,14 +42,6 @@ const validatePassword = value => {
   return error;
 };
 
-// function validateUsername(value) {
-//   let error;
-//   if (value === 'admin') {
-//     error = 'Nice try!';
-//   }
-//   return error;
-// }
-
 export const AuthForm = ({title}) => {
   const dispatch = useDispatch();
   const [value, setValue] = useState({showPassword: false,});
@@ -84,7 +75,6 @@ export const AuthForm = ({title}) => {
             fontSize: '40px',
             margin: '40px',
             color: 'var(--accent-color)',
-            // backgroundColor: '#000',
             backgroundColor:' hsl(192, 74%, 70%,0.5)',
             boxShadow:' 0 0 10px 1px hsl(192, 74%, 70%)',
           }}
@@ -193,16 +183,6 @@ export const AuthForm = ({title}) => {
                         </Typography>
                       )}
                     </Box>
-
-                    {/* <Button
-                      className={css.form__btn}
-                      fullWidth={true}
-                      // color="primary"
-                      type="submit"
-                      disabled={!!errors.email || !password}
-                    >
-                      {title === 'Register' ? 'Register' : 'Login'}
-                    </Button> */}
                     <button
                       className={css.form__btn}
                       disabled={!!errors.email || !password}>

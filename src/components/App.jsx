@@ -12,13 +12,9 @@ import { useDispatch } from "react-redux";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import HomePages from "pages/HomePages";
-// import RegisterPages from "pages/RegisterPages";
-// import LoginPages from "pages/LoginPages";
-// import ContactsPages from "pages/ContactsPages";
 import Loader from "./Loader";
 import { fetchCurrentUser } from "redux/auth/authOperations";
 import PublicRoute from "routes/PublicRoute";
-// import PrivateRoute from 'routes/PrivateRoute';
 
 const PrivateRoute = lazy(()=> import('routes/PrivateRoute'));
 const RegisterPages = lazy(()=> import('pages/RegisterPages'));
