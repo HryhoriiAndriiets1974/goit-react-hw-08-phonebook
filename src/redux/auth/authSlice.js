@@ -36,6 +36,7 @@ export const userSlice = createSlice ({
     },
     [fetchCurrentUser.fulfilled](state, { payload }) {
       state.user = payload;
+      state.token = payload.token;
       state.isLoggedIn = true;
     },
   },

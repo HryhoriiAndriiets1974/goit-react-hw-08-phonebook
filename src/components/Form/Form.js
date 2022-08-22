@@ -29,7 +29,7 @@ function Form() {
 
   const handleSubmit =  e => {
     e.preventDefault();
-    if (contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase())) {
+    if (contacts && contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase())) {
       resetForm();
       return toast.info(`${name} is already in contacts`);
     };

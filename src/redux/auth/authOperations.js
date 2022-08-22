@@ -7,7 +7,7 @@ const token = {
     axios.defaults.headers.common.Authrization = `Bearer ${token}`;
   },
   unset() {
-    axios.defaults.headers.common.Authrization = ' ';
+    axios.defaults.headers.common.Authrization = '';
   },
 };
 
@@ -51,7 +51,7 @@ export const logout = createAsyncThunk('/auth/logout', async credentials => {
 });
 
 export const fetchCurrentUser = createAsyncThunk('/auth/refresh',
-async ( _, {getState, rejectWithValue}) => {
+async (_, {getState, rejectWithValue}) => {
   const state = getState();
   const persistedToken = state.auth.token;
   if (persistedToken === null) return rejectWithValue();
@@ -62,6 +62,6 @@ async ( _, {getState, rejectWithValue}) => {
     );
     return data;
   } catch (error) {
-      toast.error('Refresh failed!!! Try again!!!')
+      toast.error('Refresh failed!!! Try again!!!');
   };
 });
